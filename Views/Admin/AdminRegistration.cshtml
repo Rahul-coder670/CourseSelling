@@ -1,0 +1,43 @@
+﻿@model Tatakae.Models.Register
+@{
+    ViewBag.Title = "AdminRegistration";
+}
+
+
+
+<div class="contact_form_container">
+    <h2 style="text-align:center;">Admin Registration Page</h2>
+    @if (ViewBag.msg != null)
+    {
+        <div class="container">
+            <div class="alert alert-warning"> @ViewBag.msg </div>
+        </div>
+    }
+    @if (TempData["msg"] != null)
+    {
+        <div class="container">
+            <div class="alert alert-warning"> @TempData["msg"] </div>
+        </div>
+    }
+    <form id="contact_form" class="contact_form" method="post">
+        <div>
+            <div class="row">
+                <div class="col-lg-6 contact_name_col">
+                    Name : <input type="text" class="contact_input" placeholder="Name" required="required" name="name">
+                    @Html.ValidationMessage("name")
+                </div>
+                <div class="col-lg-6">
+                    Email <input type="email" class="contact_input" placeholder="E-mail" required="required" name="email">
+                    @Html.ValidationMessageFor(x => x.email)
+                </div>
+            </div>
+        </div>
+        <div>Password :<input type="password" class="contact_input" placeholder="Password" required="required" name="password"></div>
+        @Html.ValidationMessageFor(x => x.password)
+        <div>Confirm Password :<input type="password" class="contact_input" placeholder="Confirm Password" required="required" name="cpassword"></div>
+        @Html.ValidationMessageFor(x => x.cpassword)
+        <div>Type :<input type="text" class="contact_input" required="required" name="cpassword" value="Admin" readonly></div>
+        <button class="contact_button"><span>Register</span><span class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
+    </form>
+</div>
+

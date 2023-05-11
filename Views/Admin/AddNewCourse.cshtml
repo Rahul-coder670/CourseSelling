@@ -1,0 +1,39 @@
+﻿
+<script>
+    tinymce.init({
+        selector: '#description',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    });
+</script>
+<div class="contact_form_container">
+    <h2 style="text-align:center;">Add New Course</h2>
+    @if (ViewBag.msg != null)
+    {
+        <div class="container">
+            <div class="alert alert-warning"> @ViewBag.msg </div>
+        </div>
+    }
+    @if (TempData["msg"] != null)
+    {
+        <div class="container">
+            <div class="alert alert-warning"> @TempData["msg"] </div>
+        </div>
+    }
+    @if (Html.ValidationSummary() != null)
+    {
+        <div class="container">
+            <div class="alert alert-warning"> @Html.ValidationSummary()</div>
+        </div>
+    }
+<form action="#" id="contact_form" class="contact_form" method="post">
+    <div><input type="text" class="contact_input" placeholder="Course Name" required="required" name="coursename" /></div>
+
+    <div><textarea class="contact_input" placeholder="Description" required="required" name="description" id="description"></textarea></div>
+    <div><input type="text" class="contact_input" placeholder="Duration" required="required" name="duration" /></div>
+    <div><input type="text" class="contact_input" placeholder="Price" required="required" name="price" /></div>
+    <button class="contact_button"><span>Add</span><span class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
+
+</form>
+</div>
+

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyWebsiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="CId" />
+    </Key>
+    <Property Name="CId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CoursesName" Type="varchar" MaxLength="30" />
+    <Property Name="Description" Type="text" />
+    <Property Name="Duration" Type="varchar" MaxLength="10" />
+    <Property Name="Price" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Purchase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CId" Type="int" />
+    <Property Name="UId" Type="int" />
+    <Property Name="OrderId" Type="varchar" MaxLength="50" />
+    <Property Name="PaymentId" Type="text" />
+    <Property Name="CheckSum" Type="text" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Status" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Records">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="C_Id" Type="int" />
+    <Property Name="U_Id" Type="int" />
+    <Property Name="PurchaseDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UId" />
+    </Key>
+    <Property Name="UId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="varchar" MaxLength="20" />
+    <Property Name="Password" Type="varchar" MaxLength="20" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Dob" Type="date" />
+    <Property Name="Address" Type="varchar" MaxLength="20" />
+    <Property Name="Type" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityContainer Name="MyWebsiteModelStoreContainer">
+    <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Records" EntityType="Self.Records" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

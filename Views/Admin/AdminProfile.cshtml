@@ -1,0 +1,127 @@
+﻿@model Tatakae.Models.ShowAll
+@{
+    ViewBag.Title = "AdminProfile";
+
+}
+<!-- Home -->
+
+<div class="home">
+    <!-- Background image artist https://unsplash.com -->
+    <div class="home_background parallax_background parallax-window" data-parallax="scroll" data-image-src="/images/about.jpg" data-speed="0.8">
+    </div>
+
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content text-center">
+                        <div class="home_title" style="padding-top:60px;">Hello Admin @ViewBag.user.Name</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="courses">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="section_title text-center">
+                    <div class="button join_button"><a href="/Admin/AdminRegistration">Add New Admin<div class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a></div>
+                </div>
+            </div>
+            <div class="col-lg-10 offset-lg-1">
+                <div class="section_title text-center"><h2>All Users</h2></div>
+
+                @if (ViewBag.msg != null)
+                {
+                    <div class="container">
+                        <div class="alert alert-warning"> @ViewBag.msg </div>
+                    </div>
+                }
+                @if (TempData["msg"] != null)
+                {
+                    <div class="container">
+                        <div class="alert alert-warning"> @TempData["msg"] </div>
+                    </div>
+                }
+
+
+            </div>
+            <div class="col-lg-10 offset-lg-1" style="background: blanchedalmond">
+                <table border="1" style="text-align:center; width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>DOB</th>
+                            <th>Address</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var us in Model.users)
+                        {
+                            <tr>
+                                <td>@us.UId</td>
+                                <td>@us.Name</td>
+                                <td>@us.Email</td>
+                                <td>@us.Phone</td>
+                                <td>@us.Dob</td>
+                                <td>@us.Address</td>
+                                <td><a href="/Admin/DeleteUsers/@us.UId">Delete</a></td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+
+<div class="courses">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="section_title text-center">
+                    <div class="button join_button"><a href="/Admin/AddNewCourse">Add New Course<div class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a></div>
+                </div>
+            </div>
+            <div class="col-lg-10 offset-lg-1">
+                <div class="section_title text-center"><h2>Courses</h2></div>
+            </div>
+            <div class="col-lg-10 offset-lg-1" style="background: blanchedalmond;">
+                <table border="1" style="text-align:center; width:100%;">
+                    <thead>
+                        <tr>
+                            <th style="width:20px;">Id</th>
+                            <th style="width:200px;">CourseName</th>
+                            <th>Description</th>
+                            <th style="width:100px;">Duration</th>
+                            <th style="width:100px;">Price</th>
+                            <th style="width:70px;">Edit</th>
+                            <th style="width:70px;">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var us in Model.courses)
+                        {
+                            <tr>
+                                <td>@us.CId</td>
+                                <td>@us.CoursesName</td>
+                                <td style="text-align:left;">@Html.Raw(us.Description)</td>
+                                <td>@us.Duration months</td>
+                                <td>Rs.@us.Price</td>
+                                <td><a href="/Admin/EditCourses/@us.CId">Update</a></td>
+                                <td><a href="/Admin/DeleteCourses/@us.CId">Delete</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+
+

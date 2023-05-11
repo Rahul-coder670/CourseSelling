@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyWebsiteModelStoreContainer" CdmEntityContainer="MyWebsiteEntities">
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Cours">
+        <MappingFragment StoreEntitySet="Courses">
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="CId" ColumnName="CId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CoursesName" ColumnName="CoursesName" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="MyWebsiteModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UId" ColumnName="UId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Dob" ColumnName="Dob" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Records">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Record">
+        <MappingFragment StoreEntitySet="Records">
+          <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+          <ScalarProperty Name="U_Id" ColumnName="U_Id" />
+          <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+          <ScalarProperty Name="RId" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchases">
+      <EntityTypeMapping TypeName="MyWebsiteModel.Purchase">
+        <MappingFragment StoreEntitySet="Purchase">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CheckSum" ColumnName="CheckSum" />
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="UId" ColumnName="UId" />
+          <ScalarProperty Name="CId" ColumnName="CId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
