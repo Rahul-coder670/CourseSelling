@@ -24,7 +24,7 @@ namespace Tatakae.Controllers
                 if (b.Type == "Admin")
                 {
                     TempData["msg"] = "Please logout to access this page!";
-                    return RedirectToAction("../Admin/AdminProfile");
+                    return RedirectToAction("AdminProfile", "Admin");
                 }
                 TempData["msg"] = "Please logout to access this page!";
                 return RedirectToAction("UserProfile");
@@ -41,7 +41,7 @@ namespace Tatakae.Controllers
                 if (b.Type == "Admin")
                 {
                     TempData["msg"] = "Please logout to access this page!";
-                    return RedirectToAction("../Admin/AdminProfile");
+                    return RedirectToAction("AdminProfile", "Admin");
                 }
                 TempData["msg"] = "Please logout to access this page!";
                 return RedirectToAction("UserProfile");
@@ -57,7 +57,16 @@ namespace Tatakae.Controllers
 
             return View(courses);
         }
-
+        public ActionResult BuyCourse(Nullable<int> id)
+        {
+            if (id == null)
+            {
+                TempData["msg"] = "Please select a course to access BuyCourse page!";
+                return RedirectToAction("Courses");
+            }
+            var product = crud.Courses.FirstOrDefault(y => y.CId == id);
+            return View(product);
+        }
         public ActionResult Register()
         {
             if (Session["user_id"] != null)
@@ -91,16 +100,16 @@ namespace Tatakae.Controllers
             }
             if (ModelState.IsValid)
             {
-                var b = crud.Users.Select(a => new { a.Email }).FirstOrDefault(y => y.Email == register.email);
+                var b = crud.Users.Select(a => new { a.Email }).FirstOrDefault(y => y.Email == register.Email);
 
                 if (b == null)
                 {
                     User user = new User()
                     {
-                        Name = register.name,
-                        Email = register.email,
-                        Password = register.password,
-                        Type = register.type,
+                        Name = register.Name,
+                        Email = register.Email,
+                        Password = register.Password,
+                        Type = register.Type,
                     };
                     crud.Users.Add(user);
                     crud.SaveChanges();
@@ -173,6 +182,7 @@ namespace Tatakae.Controllers
             }
             return View();
         }
+
         public int Calculate(DateTime date, int duration)
         {
             duration = 30 * duration;
@@ -183,10 +193,8 @@ namespace Tatakae.Controllers
             }
             return 0;
         }
-
         public ActionResult UserProfile()
         {
-            Session["user_id"] = "2";
             if (Session["user_id"] == null)
             {
                 TempData["msg"] = "Please Login to access this page!";
@@ -196,7 +204,7 @@ namespace Tatakae.Controllers
             var user = crud.Users.Where(a => a.UId == id).FirstOrDefault();
             if (user.Type == "Admin")
             {
-                TempData["msg"] = "That page is only for user!";
+                TempData["msg"] = "That page is only for users!";
                 return RedirectToAction("AdminProfile", "Admin");
             }
             ViewBag.user = user;
@@ -229,23 +237,68 @@ namespace Tatakae.Controllers
             return View(recordModels);
             
         }
-        public ActionResult BuyCourse(int id)
+        
+
+        public ActionResult EditUserProfile()
         {
-            if (id == 0)
+            if (Session["user_id"] == null)
             {
-                TempData["msg"] = "Please click on a course to access this page!";
-                return RedirectToAction("Courses");
+                TempData["msg"] = "Please Login to access this page!";
+                return RedirectToAction("Login");
             }
-            var product = crud.Courses.FirstOrDefault(y => y.CId == id);
-            return View(product);
+            int id = Convert.ToInt32(Session["user_id"]);
+            var user = crud.Users.Where(a => a.UId == id).FirstOrDefault();
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult EditUserProfile(EditUser edit)
+        {
+            int id = Convert.ToInt32(Session["user_id"]);
+            var user = crud.Users.Where(a => a.UId == id).FirstOrDefault();
+
+            if (edit.Name != null && edit.Name != "")
+            {
+                user.Name = edit.Name;
+            }
+            if (edit.Email != null && edit.Email != "")
+            {
+                user.Email = edit.Email;
+            }
+            if (edit.Password != null && edit.Password != "")
+            {
+                user.Password = edit.Password;
+            }
+            if (edit.Phone != null && edit.Phone != "")
+            {
+                user.Phone = edit.Phone;
+            }
+            if (edit.Dob != null)
+            {
+                user.Dob = edit.Dob;
+            }
+            if (edit.Address != null && edit.Address != "")
+            {
+                user.Address = edit.Address;
+            }
+            crud.SaveChanges();
+            return RedirectToAction("UserProfile");
+        }
+
+        public ActionResult Logout()
+        {
+            if (Session["user_id"] == null)
+            {
+                TempData["msg"] = "Please Login to access this page!";
+                return RedirectToAction("Login");
+            }
+ 
+            Session.Abandon();
+            TempData["msg"] = "You have logged out.";
+            return RedirectToAction("Login");
         }
         public ActionResult Buy(int id)
         {
-            if (id == 0)
-            {
-                TempData["msg"] = "Please click on a course to access this page!";
-                return RedirectToAction("Courses");
-            }
             if (Session["user_id"] == null)
             {
                 TempData["msg"] = "Please Login to access this page!";

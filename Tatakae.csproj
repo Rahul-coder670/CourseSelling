@@ -356,6 +356,7 @@
     <Content Include="Views\Home\BuyCourse.cshtml" />
     <Content Include="Views\Home\Buy.cshtml" />
     <Content Include="Views\Admin\AdminRegistration.cshtml" />
+    <Content Include="Views\Home\EditUserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

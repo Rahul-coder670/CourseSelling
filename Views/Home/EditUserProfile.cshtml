@@ -1,7 +1,7 @@
-﻿@model Tatakae.Models.Cours
+﻿@model Tatakae.Models.User
 <script>
     tinymce.init({
-        selector: '#description',
+        selector: '#address',
         plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
         toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
     });
@@ -27,15 +27,13 @@
             <div class="alert alert-warning"> @Html.ValidationSummary()</div>
         </div>
     }
-    <form id="contact_form" class="contact_form" method="post">
+<form id="contact_form" class="contact_form" method="post">
 
-        <div><input type="text" class="contact_input" placeholder="Course Name" required="required" name="coursename" value="@Model.CoursesName" /></div>
-
-        <div><textarea class="contact_input" placeholder="Description" required="required" name="description" id="description">@Model.Description</textarea></div>
-        <div><input type="text" class="contact_input" placeholder="Duration" required="required" name="duration" value="@Model.Duration" /></div>
-        <div><input type="text" class="contact_input" placeholder="Price" required="required" name="price" value="@Model.Price" /></div>
-        <button class="contact_button"><span>Update</span><span class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
-    </form>
+    <div>Name :<input type="text" class="contact_input" name="Name" value="@Model.Name" /></div>
+    <div>Email : <input type="email" class="contact_input" name="Email" value="@Model.Email" /></div>
+    <div>Password :<input type="password" class="contact_input" name="Password" value="@Model.Password" /></div>
+    <div>DOB :<input type="date" class="contact_input" name="Dob" value="@Model.Dob" /></div>
+    <div><textarea class="contact_input" name="Address" id="address">@Model.Address</textarea></div>
+    <button class="contact_button"><span>Update</span><span class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
+</form>
 </div>
-   
-

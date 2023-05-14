@@ -25,56 +25,60 @@
 
 
 <div class="courses" style="padding-top: 20px;">
-    
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1">
-                <div class="section_title text-center"><h2>Subscribed Courses</h2></div>
-                @if (ViewBag.msg != null)
-                {
-                    <div class="container">
-                        <div class="alert alert-warning"> @ViewBag.msg </div>
-                    </div>
-                }
-                @if (TempData["msg"] != null)
-                {
-                    <div class="container">
-                        <div class="alert alert-warning"> @TempData["msg"] </div>
-                    </div>
-                }
-            </div>
-            <div></div>
-            <div class="col-lg-10 offset-lg-1" style="background: blanchedalmond">
-                <table width="100%">
-                    <thead>
-                        <tr>
-                            <th>Sr No.</th>
-                            <th>Duration</th>
-                            <th>Purchased Date</th>
-                            <th>Valid</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                        @{
-                            int srno = 1;
-                            foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td> @srno </td>
-                                    <td>@item.Duration months</td>
-                                    <td>@item.PDate</td>
-                                    <td>@item.Validity days</td>
-                                    <td><a class="btn btn-outline-success" href="/Home/BuyCourse/@item.PId">See Pack</a></td>
-                                </tr>
-                                srno++;
-                            }
-                        }
-                    </tbody>
-                </table>
-            </div>
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="section_title text-center"><h2>Subscribed Courses</h2></div>
+            @if (ViewBag.msg != null)
+            {
+                <div class="container">
+                    <div class="alert alert-warning"> @ViewBag.msg </div>
+                </div>
+            }
+            @if (TempData["msg"] != null)
+            {
+                <div class="container">
+                    <div class="alert alert-warning"> @TempData["msg"] </div>
+                </div>
+            }
         </div>
-    
+        <div></div>
+        <div class="col-lg-10 offset-lg-1" style="background: blanchedalmond">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>Sr No.</th>
+                        <th>Duration</th>
+                        <th>Purchased Date</th>
+                        <th>Valid</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        int srno = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td> @srno </td>
+                                <td>@item.Duration months</td>
+                                <td>@item.PDate</td>
+                                <td>@item.Validity days</td>
+                                <td><a class="btn btn-outline-success" href="/Home/BuyCourse/@item.PId">See Pack</a></td>
+                            </tr>
+                            srno++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-10 offset-lg-1">
+                <div class="button join_button"><a href="/Home/EditUserProfile">Edit Profile<div class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a></div>
+                <div class="button join_button"><a href="/Home/Logout">Logout<div class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a></div>
+        </div>
+    </div>
+
 </div>
 
 

@@ -14,9 +14,6 @@ namespace Tatakae.Controllers
         
         public ActionResult AdminProfile()
         {
-            Session["user_id"] ="1";
-
-
             if (Session["user_id"] == null)
             {
                 TempData["msg"] = "Please Login to access this page!";
@@ -62,21 +59,21 @@ namespace Tatakae.Controllers
         {
             if (ModelState.IsValid)
             {
-                var b = crud.Users.Select(a => new { a.Email }).FirstOrDefault(y => y.Email == register.email);
+                var b = crud.Users.Select(a => new { a.Email }).FirstOrDefault(y => y.Email == register.Email);
 
                 if (b == null)
                 {
                     User user = new User()
                     {
-                        Name = register.name,
-                        Email = register.email,
-                        Password = register.password,
-                        Type = register.type,
+                        Name = register.Name,
+                        Email = register.Email,
+                        Password = register.Password,
+                        Type = register.Type,
                     };
                     crud.Users.Add(user);
                     crud.SaveChanges();
-                    ViewBag.msg = "Registration Successful";
-                    return RedirectToAction("AdminProfile");
+                    TempData["msg"] = "Registration Successful";
+                    return RedirectToAction("Login", "Home");
                 }
             }
             ViewBag.msg = "This email already exists";
@@ -109,7 +106,7 @@ namespace Tatakae.Controllers
             if (Session["user_id"] == null)
             {
                 TempData["msg"] = "Please Login to access this page!";
-                return RedirectToAction("../Home/Login");
+                return RedirectToAction("Login", "Home");
             }
             int uid = Convert.ToInt32(Session["user_id"]);
             var b = crud.Users.Select(a => new { a.UId, a.Type }).FirstOrDefault(y => y.UId == uid);
@@ -188,7 +185,7 @@ namespace Tatakae.Controllers
         {
             if (ModelState.IsValid)
             {
-                var b = crud.Courses.Select(a => new { a.CoursesName }).FirstOrDefault(y => y.CoursesName == add.Coursename);
+                var b = crud.Courses.Select(a => new { a.CoursesName , a.Duration }).FirstOrDefault(y => y.CoursesName == add.Coursename && y.Duration == add.Duration);
 
                 if (b == null)
                 {
@@ -202,11 +199,11 @@ namespace Tatakae.Controllers
                     crud.Courses.Add(course);
                     crud.SaveChanges();
                     ViewBag.msg = "New Course Added";
-                    return RedirectToAction("AdminProfile");
+                    return View();
                 }
             }
            
-            ViewBag.msg = "This course already exists";
+            ViewBag.msg = "This course with this duration already exists";
             return View();
         }
     }

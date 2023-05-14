@@ -11,16 +11,16 @@ namespace Tatakae.Models
     public class Register
     {
         [Required(ErrorMessage = "Name is requiured")]
-        public string name { get; set; }
+        public string Name { get; set; }
         [Required(ErrorMessage = "Email is requiured")]
         [EmailAddress]
-        public string email { get; set; }
+        public string Email { get; set; }
         [Required(ErrorMessage = "password is requiured")]
-        public string password { get; set; }
+        public string Password { get; set; }
         [Required(ErrorMessage = "Confirm password is requiured")]
         [Compare("password", ErrorMessage = "password and confirm password didnt matched")]
-        public string cpassword { get; set; }
-        public string type { get; set; }
+        public string Cpassword { get; set; }
+        public string Type { get; set; }
     }
      
     public class LoginUser
@@ -61,5 +61,16 @@ namespace Tatakae.Models
         
     }
 
+    public class EditUser
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Phone { get; set; }
+        public DateTime Dob { get; set; }
+        public string Address { get; set; }
+
+
+    }
 }
 
